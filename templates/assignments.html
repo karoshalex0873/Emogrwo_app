@@ -1,0 +1,151 @@
+<section
+  id="upload-assignments"
+  class="container-fluid py-3 px-3"
+  style="max-height: 70vh; overflow-y: auto; background-color: #f8f9fa;"
+>
+  <div
+    class="bg-white text-dark p-4 rounded shadow-sm mx-auto"
+    style="max-width: 900px; border: 1px solid #e5e5e5;"
+  >
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-3 "
+    style="gap: 10px;">
+      <h6 class="fs-5 text-success d-block align-items-center">
+        <i class="fas fa-book-reader me-2"></i> Assignments
+      </h6>
+      <div class="d-flex align-items-center">
+        <a
+          href="{% url 'assignment' %}"
+          class="text-decoration-none text-success d-block align-items-center me-3"
+          style="font-size: 0.9rem;"
+        >
+          <i class="fas fa-external-link-alt me-1"></i> Check_Assignments
+        </a>
+        <button
+          class="btn btn-success btn-sm"
+          id="add-assignment-btn"
+          title="Submit Assignment"
+          style="font-size: 0.9rem;"
+        >
+          <i class="fas fa-upload me-1"></i> Submit_Assignment
+        </button>
+      </div>
+    </div>
+
+    <!-- Assignment List -->
+    <div class="card mb-3 border-0 shadow-sm">
+      <div class="card-header bg-success text-white fw-bold">Latest Assignments</div>
+      <ul class="list-group list-group-flush">
+        {% for submitted in submitted %}
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+          style="padding: 10px;"
+        >
+          <div class="d-flex align-items-center">
+            <i class="fas fa-file-alt text-success me-2"></i>
+            <span>{{ submitted.title }}</span>
+          </div>
+          <a
+            href="{{ submitted.file.url }}"
+            class="btn btn-outline-success btn-sm"
+          >
+            <i class="fas fa-download"></i> Download
+          </a>
+        </li>
+        {% empty %}
+        <li class="list-group-item text-center py-3">
+          <i class="fas fa-info-circle text-warning me-2"></i> No assignments
+          uploaded yet.
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Instructions Section -->
+    <div class="mt-3 p-3 bg-light border rounded">
+      <h5 class="text-dark fw-bold">How to Submit Your Assignment:</h5>
+      <p class="mb-0">
+        To submit your assignment, click the "Submit Assignment" button above,
+        upload your file, and provide a title for your work. Ensure that your file is
+        in a supported format.
+      </p>
+    </div>
+  </div>
+
+  <!-- Submit Assignment Modal -->
+  <div
+    id="add-assignment-modal"
+    class="position-fixed top-50 start-50 translate-middle bg-white text-dark p-4 rounded shadow-lg d-none"
+    style="width: 90%; max-width: 500px; z-index: 1050;"
+    aria-hidden="true"
+  >
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="fs-6 fw-bold text-success">Submit Your Assignment</h3>
+      <button
+        class="btn-close"
+        id="close-modal-btn"
+        aria-label="Close"
+      ></button>
+    </div>
+    <form action="{% url 'assignment' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="title" class="form-label fw-bold text-dark"
+          >Assignment Title</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          placeholder="Enter assignment title"
+          required
+          style="border-color: #198754;"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="assignment-file" class="form-label fw-bold text-dark"
+          >Upload Your Assignment</label
+        >
+        <input
+          type="file"
+          class="form-control"
+          id="assignment-file"
+          name="file"
+          required
+          style="border-color: #198754;"
+        />
+      </div>
+      <button type="submit" class="btn btn-success w-100">
+        <i class="fas fa-upload me-2"></i> Submit Assignment
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Modal Toggle Script -->
+<script>
+  const addBtn = document.getElementById("add-assignment-btn");
+  const modal = document.getElementById("add-assignment-modal");
+  const closeModalBtn = document.getElementById("close-modal-btn");
+
+  // Open modal
+  addBtn.addEventListener("click", () => {
+    modal.classList.remove("d-none");
+    modal.setAttribute("aria-hidden", "false");
+  });
+
+  // Close modal
+  closeModalBtn.addEventListener("click", () => {
+    modal.classList.add("d-none");
+    modal.setAttribute("aria-hidden", "true");
+  });
+
+  // Close modal by clicking outside
+  window.addEventListener("click", (e) => {
+    if (!modal.contains(e.target) && e.target !== addBtn) {
+      modal.classList.add("d-none");
+      modal.setAttribute("aria-hidden", "true");
+    }
+  });
+</script>

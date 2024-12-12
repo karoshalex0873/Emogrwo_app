@@ -1,0 +1,175 @@
+<section
+  id="private-sessions"
+  class="py-4"
+  style="max-height: 70vh; overflow-y: auto"
+>
+  <div class="container">
+    <!-- Form Header -->
+    <h2 class="text-success mb-4 text-center">Submit an Issue</h2>
+
+    <!-- Issue Submission Form -->
+    <form
+      action="{% url 'issue' %}"
+      method="POST"
+      enctype="multipart/form-data"
+      class="bg-light p-3 rounded shadow-sm"
+    >
+      {% csrf_token %}
+      <div class="row g-3">
+        <!-- Student Selection -->
+        <div class="col-md-6">
+          <label for="student-name" class="form-label text-dark">
+            <i class="fas fa-user-graduate text-success"></i> Select Student
+          </label>
+          <select
+            class="form-control"
+            id="student-name"
+            name="student_name"
+            required
+          >
+            <option value="">Choose Student</option>
+            {% for student in students %}
+            <option value="{{ student.id }}">{{ student.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Issue Type Selection -->
+        <div class="col-md-6">
+          <label for="issue-type" class="form-label text-dark">
+            <i class="fas fa-exclamation-circle text-danger"></i> Select Issue
+            Type
+          </label>
+          <select
+            class="form-control"
+            id="issue-type"
+            name="issue_type"
+            required
+          >
+            <option value="">Choose Issue Type</option>
+            <option value="text">Text</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Text Issue -->
+      <div id="text-issue" class="mt-3 issue-content" style="display: none">
+        <label for="text-message" class="form-label text-dark">
+          <i class="fas fa-keyboard text-primary"></i> Describe Your Issue
+        </label>
+        <textarea
+          class="form-control"
+          id="text-message"
+          name="text_message"
+          rows="3"
+          placeholder="Please describe your issue"
+        ></textarea>
+      </div>
+
+      <!-- Audio Issue -->
+      <div id="audio-issue" class="mt-3 issue-content" style="display: none">
+        <label for="audio-message" class="form-label text-dark">
+          <i class="fas fa-microphone text-warning"></i> Record or Upload Audio
+        </label>
+        <input
+          type="file"
+          class="form-control"
+          id="audio-message"
+          name="audio_message"
+          accept="audio/*"
+        />
+      </div>
+
+      <!-- Video Issue -->
+      <div id="video-issue" class="mt-3 issue-content" style="display: none">
+        <label for="video-message" class="form-label text-dark">
+          <i class="fas fa-video text-info"></i> Record or Upload Video
+        </label>
+        <input
+          type="file"
+          class="form-control"
+          id="video-message"
+          name="video_message"
+          accept="video/*"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-success w-100 mt-3">
+        <i class="fas fa-paper-plane"></i> Submit Issue
+      </button>
+    </form>
+
+    <!-- Submitted Issues Section -->
+    <h3 class="text-success mt-5">Submitted Issues</h3>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered text-center">
+        <thead class="table-success">
+          <tr>
+            <th><i class="fas fa-user"></i> Student</th>
+            <th><i class="fas fa-clock"></i> Date</th>
+            <th><i class="fas fa-file-alt"></i> Issue Type</th>
+            <th><i class="fas fa-info-circle"></i> Details</th>
+            <th><i class="fas fa-trash"></i> Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for issue in issues %}
+          <tr>
+            <td>{{ issue.student_name }}</td>
+            <td>{{ issue.date }}</td>
+            <td>{{ issue.issue_type }}</td>
+            <td>
+              {% if issue.text_message %}
+              <p>{{ issue.text_message }}</p>
+              {% endif %} {% if issue.audio_message %}
+              <audio controls>
+                <source src="{{ issue.audio_message.url }}" type="audio/mpeg" />
+              </audio>
+              {% endif %} {% if issue.video_message %}
+              <video controls width="100">
+                <source src="{{ issue.video_message.url }}" type="video/mp4" />
+              </video>
+              {% endif %}
+            </td>
+            <td>
+              <a
+                href="{% url 'delete_issue' issue.id %}"
+                class="btn btn-danger btn-sm"
+              >
+                <i class="fas fa-trash-alt"></i> Delete
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-muted">No issues submitted yet.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Handle dynamic form display based on selected issue type
+  const issueTypeSelect = document.getElementById("issue-type");
+  const textIssue = document.getElementById("text-issue");
+  const audioIssue = document.getElementById("audio-issue");
+  const videoIssue = document.getElementById("video-issue");
+
+  issueTypeSelect.addEventListener("change", () => {
+    textIssue.style.display = "none";
+    audioIssue.style.display = "none";
+    videoIssue.style.display = "none";
+
+    if (issueTypeSelect.value === "text") textIssue.style.display = "block";
+    else if (issueTypeSelect.value === "audio")
+      audioIssue.style.display = "block";
+    else if (issueTypeSelect.value === "video")
+      videoIssue.style.display = "block";
+  });
+</script>

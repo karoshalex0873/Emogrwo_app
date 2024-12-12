@@ -1,0 +1,93 @@
+<section id="questions-and-responses" class="py-4" style="height: 100%">
+  <div class="row justify-content-center flex-grow-1 overflow-auto">
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <h2 class="text-success fw-bold">Survey Questions</h2>
+            <p class="text-muted small">
+              Share your feedback by answering these questions!
+            </p>
+            <div class="d-flex justify-content-center align-items-center mt-2">
+              <a
+                href="{% url 'response' %}"
+                class="text-decoration-none text-success d-flex align-items-center fw-bold"
+                style="font-size: 1rem"
+              >
+                <i class="fa fa-eye" aria-hidden="true"></i> Check Surveys
+              </a>
+            </div>
+          </div>
+
+          <!-- Flexbox Layout for Tables (Side by Side) -->
+          <div class="d-flex gap-4">
+
+            <!-- Questions Table -->
+            <div class="table-responsive" style="max-height: 50vh; overflow-y: auto; flex: 1;">
+              <table class="table table-bordered table-striped">
+                <thead class="table-success">
+                  <tr>
+                    <th>Question</th>
+                    <th>Question Body</th>
+                    <th>Actions</th> <!-- For Delete Button -->
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for question in questions %}
+                  <tr>
+                    <td>{{ question.title }}</td>
+                    <td>{{ question.body }}</td>
+                    <td>
+                      <a href="{% url 'delete_question' question.id %}" class="btn btn-danger btn-sm">
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="3" class="text-center text-muted">No survey questions available.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Responses Table -->
+            <div class="table-responsive" style="max-height: 30vh; overflow-y: auto; flex: 1;">
+              <table class="table table-bordered table-striped">
+                <thead class="table-success">
+                  <tr>
+                    <th>Question</th>
+                    <th>Response</th>
+                    <th>Submitted At</th>
+                    <th>Actions</th> <!-- For Delete Button -->
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for response in myrespo %}
+                  <tr>
+                    <td>{{ response.question.title }}</td>
+                    <td>{{ response.response_text }}</td>
+                    <td>{{ response.submitted_at }}</td>
+                    <td>
+                      <a href="{% url 'delete_response' response.id %}" class="btn btn-danger btn-sm">
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="4" class="text-center text-muted">No survey responses available.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

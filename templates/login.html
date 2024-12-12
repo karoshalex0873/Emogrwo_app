@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+      body {
+        background: url("{% static 'assets/img/events-item-1.jpg' %}") no-repeat
+          center center fixed;
+        background-size: cover;
+        backdrop-filter: blur(10px);
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .form-container {
+        width: 90%;
+        max-width: 400px;
+        height: auto;
+        background: rgba(255, 255, 255, 0.915);
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.186);
+        padding: 20px;
+      }
+
+      .form-header {
+        background-color: #388e3c;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .form-label {
+        font-weight: bold;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .form-control {
+        height: 40px;
+        font-size: 0.9rem;
+        padding: 5px 10px;
+      }
+
+      .btn-login {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        height: 45px;
+        font-size: 0.9rem;
+      }
+
+      .btn-login:hover {
+        background-color: #388e3c;
+      }
+
+      a {
+        color: #388e3c;
+        font-weight: bold;
+      }
+
+      a:hover {
+        color: #2e7d32;
+        text-decoration: none;
+      }
+
+      @media (max-width: 576px) {
+        .form-container {
+          width: 100%;
+          max-width: 300px;
+          margin: 10px;
+          padding: 15px;
+        }
+
+        .form-header h3 {
+          font-size: 1.2rem;
+        }
+
+        .btn-login {
+          font-size: 0.8rem;
+          height: 40px;
+        }
+
+        .form-label {
+          font-size: 0.8rem;
+        }
+
+        .form-control {
+          font-size: 0.8rem;
+          height: 35px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="form-container">
+      <div class="form-header">
+        <h3>Login for Student</h3>
+      </div>
+      <form method="POST" action="{% url 'main' %}">
+        {% csrf_token %}
+
+        <!-- Username Input -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+
+        <!-- Password Input -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-login">Login</button>
+        </div>
+
+        <!-- Register Redirect -->
+        <p class="text-center mt-3">
+          Don't have an account?
+          <a href="{% url 'register' %}">Register here</a>
+        </p>
+      </form>
+      {% if error %}
+      <p style="color: red">{{ error }}</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Index - Mentor Bootstrap Template</title>
+    {% load static %}
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/fav.png' %}" rel="icon" />
+    <link
+      href="{% static 'assets/img/fav.png' %}"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS File -->
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+
+    <!-- =======================================================
+  * Template Name: Mentor
+  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body class="about-page">
+    <header
+      id="header"
+      class="header d-flex align-items-center sticky-top bg-light shadow-sm"
+    >
+      <div
+        class="container-fluid container-xl d-flex justify-content-between align-items-center py-1"
+      >
+        <!-- Site Name -->
+        <h1 class="sitename mb-0 text-success fs-3 fw-bold">EmoGrow</h1>
+
+        <!-- Navigation Menu -->
+        <nav id="navmenu" class="navmenu">
+          <ul class="nav justify-content-center mb-0">
+            <li class="nav-item">
+              <a href="{% url 'getstarted' %}" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'about' %}" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'price' %}" class="nav-link">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Get Started Button -->
+        <a
+          class="btn btn-success text-white px-4 py-2 rounded-pill"
+          href="{% url 'register' %}"
+        >
+          Get Started
+        </a>
+        <a
+          class="btn btn-success text-white px-4 py-2 rounded-pill"
+          href="{% url 'register' %}"
+        >
+          <i class="bi bi-box-arrow-in-right"></i>
+          <!-- Login icon -->
+        </a>
+
+        <!-- Mobile Navigation Toggle Icon -->
+        <i class="mobile-nav-toggle d-xl-none bi bi-list fs-1 text-dark"></i>
+      </div>
+    </header>
+
+    <main class="main">
+      <section id="about" class="about section">
+        <div class="container">
+          <div class="row gy-4">
+            <div
+              class="col-lg-6 order-1 order-lg-2"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <img
+                src="{% static 'assets/img/about.jpg' %}"
+                class="img-fluid"
+                alt=""
+                style="border-radius: 10px"
+              />
+            </div>
+
+            <div
+              class="col-lg-6 order-2 order-lg-1 content"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <h3>About Us</h3>
+              <p class="fst-italic">
+                EmoGrow is a web-based app designed to promote Social-Emotional
+                Learning (SEL) through personalized emotional check-ins,
+                interactive lessons, and gamified activities. It makes SEL
+                accessible, engaging, and measurable for students and
+                individuals alike
+              </p>
+              <ul>
+                <p>Main Fetures</p>
+                <li>
+                  <i class="bi bi-check-circle"></i>
+                  <span
+                    >Tracks emotional states and fosters self-awareness</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle"></i>
+                  <span
+                    >Teaches skills like empathy, emotional regulation, and
+                    conflict resolution.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle"></i>
+                  <span
+                    >Gamified Activities: Encourages engagement through
+                    challenges and rewards.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle"></i>
+                  <span
+                    >Progress Tracking: Helps users and educators monitor SEL
+                    growth over time.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle"></i>
+                  <span
+                    >Teacher and Parent Integration: Bridges the gap between
+                    home and school for holistic SEL development.</span
+                  >
+                </li>
+              </ul>
+              <a href="#" class="read-more"
+                ><span>Read More</span><i class="bi bi-arrow-right"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /About Us Section -->
+
+      <!-- Counts Section -->
+      <section id="counts" class="section counts light-background">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-4">
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span
+                  data-purecounter-start="0"
+                  data-purecounter-end="1232"
+                  data-purecounter-duration="1"
+                  class="purecounter"
+                ></span>
+                <p>Students</p>
+              </div>
+            </div>
+            <!-- End Stats Item -->
+
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span
+                  data-purecounter-start="0"
+                  data-purecounter-end="64"
+                  data-purecounter-duration="1"
+                  class="purecounter"
+                ></span>
+                <p>Courses</p>
+              </div>
+            </div>
+            <!-- End Stats Item -->
+
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span
+                  data-purecounter-start="0"
+                  data-purecounter-end="42"
+                  data-purecounter-duration="1"
+                  class="purecounter"
+                ></span>
+                <p>Events</p>
+              </div>
+            </div>
+            <!-- End Stats Item -->
+
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span
+                  data-purecounter-start="0"
+                  data-purecounter-end="24"
+                  data-purecounter-duration="1"
+                  class="purecounter"
+                ></span>
+                <p>Trainers</p>
+              </div>
+            </div>
+            <!-- End Stats Item -->
+          </div>
+        </div>
+      </section>
+      <!-- /Counts Section -->
+    </main>
+
+    <!-- Trainers Index Section -->
+    <section id="trainers-index" class="section trainers-index">
+      <div class="container">
+        <div class="row">
+          <!-- Trainer 1 -->
+          <div
+            class="col-lg-4 col-md-6 d-flex"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="member">
+              <img
+                src="{% static 'assets/img/trainers/trainer-1.jpg' %}"
+                class="img-fluid"
+                alt="Trainer Image"
+              />
+              <div class="member-content">
+                <h4>Emma Johnson</h4>
+                <span>Emotional Regulation</span>
+                <p>
+                  Emma specializes in emotional regulation techniques, helping
+                  students manage their emotions in challenging situations,
+                  improving self-awareness, and enhancing emotional resilience.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Trainer 1 -->
+
+          <!-- Trainer 2 -->
+          <div
+            class="col-lg-4 col-md-6 d-flex"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="member">
+              <img
+                src="{% static 'assets/img/trainers/trainer-2.jpg' %}"
+                class="img-fluid"
+                alt="Trainer Image"
+              />
+              <div class="member-content">
+                <h4>John Smith</h4>
+                <span>Empathy & Communication</span>
+                <p>
+                  John teaches students how to develop empathy, enhance active
+                  listening skills, and improve communication to foster better
+                  interpersonal relationships.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Trainer 2 -->
+
+          <!-- Trainer 3 -->
+          <div
+            class="col-lg-4 col-md-6 d-flex"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="member">
+              <img
+                src="{% static 'assets/img/trainers/trainer-3.jpg' %}"
+                class="img-fluid"
+                alt="Trainer Image"
+              />
+              <div class="member-content">
+                <h4>Sarah Lee</h4>
+                <span>Stress Management</span>
+                <p>
+                  Sarah helps students develop stress management strategies,
+                  teaching mindfulness, relaxation techniques, and cognitive
+                  reframing to build mental resilience.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Trainer 3 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- /Trainers Index Section -->
+    <footer
+      id="footer"
+      class="footer position-relative light-background py-4 mt-5"
+    >
+      <div class="container text-center">
+        <p class="mb-0">
+          © <span>Copyright</span>
+          <strong class="px-1 text-success">EmoGrow</strong>
+          <span>All Rights Reserved</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+  </body>
+</html>

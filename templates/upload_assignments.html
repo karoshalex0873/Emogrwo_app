@@ -1,0 +1,153 @@
+<section id="upload-assignments" class="container-fluid py-4 px-3">
+  <div
+    class="bg-white text-dark p-4 rounded shadow-sm mx-auto"
+    style="max-width: 800px"
+  >
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fs-5 d-flex align-items-center">
+        <i class="fas fa-upload text-success me-2"></i> Uploaded Assignments
+      </h2>
+      <a
+        href="{% url 'upload' %}"
+        class="d-flex align-items-center text-decoration-none"
+      >
+        <h5 class="fs-5 d-flex align-items-center text-success">
+          <i
+            class="fas fa-external-link-alt text-success"
+            aria-hidden="true"
+          ></i>
+          show list
+        </h5>
+      </a>
+
+      <button
+        class="btn btn-outline-success btn-sm"
+        id="add-assignment-btn"
+        title="Add Assignment"
+      >
+        <i class="fas fa-plus-circle fs-6"></i> Add
+      </button>
+    </div>
+
+    <!-- Assignment List -->
+    <ul class="list-group list-group-flush">
+      {% for assignment in docs %}
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center bg-white border rounded shadow-sm p-3 mb-3"
+      >
+        <!-- Assignment Title -->
+        <p class="mb-0 fw-semibold text-truncate" style="max-width: 60%">
+          {{ assignment.title }}
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="btn-group" role="group" style="gap: 10px">
+          <!-- Download Button -->
+          <a
+            href="{{ assignment.file.url }}"
+            class="btn btn-outline-primary btn-sm d-flex align-items-center"
+            title="Download Assignment"
+          >
+            <i class="fas fa-download me-2"></i> Download
+          </a>
+
+          <!-- Delete Button -->
+          <a
+            href="{% url 'delete' assignment.id %}"
+            class="btn btn-outline-danger btn-sm d-flex align-items-center"
+            title="Delete Assignment"
+          >
+            <i class="fas fa-trash me-2"></i> Delete
+          </a>
+        </div>
+      </li>
+      {% empty %}
+      <li class="list-group-item bg-light border-0 text-center py-4">
+        <i class="fas fa-info-circle text-warning fs-4 mb-2"></i>
+        <p class="mb-0 text-muted">No assignments uploaded yet.</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Add Assignment Modal -->
+  <div
+    id="add-assignment-modal"
+    class="position-fixed top-50 start-50 translate-middle bg-white text-dark p-4 rounded shadow-lg d-none"
+    style="width: 90%; max-width: 500px; z-index: 1050"
+  >
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="fs-6 mb-0">Add Assignment</h3>
+      <button
+        class="btn-close"
+        id="close-modal-btn"
+        aria-label="Close"
+      ></button>
+    </div>
+    <form
+      method="POST"
+      enctype="multipart/form-data"
+      action="{% url 'upload' %}"
+    >
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="title" class="form-label fw-bold">Assignment Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          placeholder="Enter assignment title"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="assignment-file" class="form-label fw-bold"
+          >Upload File</label
+        >
+        <input
+          type="file"
+          class="form-control"
+          id="assignment-file"
+          name="file"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-success w-100">
+        <i class="fas fa-upload me-2"></i> Upload
+      </button>
+    </form>
+    {% if messages %}
+    <div class="alert-messages">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const addAssignmentBtn = document.getElementById("add-assignment-btn");
+  const addAssignmentModal = document.getElementById("add-assignment-modal");
+  const closeModalBtn = document.getElementById("close-modal-btn");
+
+  // Show modal
+  addAssignmentBtn.addEventListener("click", () => {
+    addAssignmentModal.classList.remove("d-none");
+  });
+
+  // Hide modal
+  closeModalBtn.addEventListener("click", () => {
+    addAssignmentModal.classList.add("d-none");
+  });
+
+  // Close modal when clicking outside the modal content
+  window.addEventListener("click", (event) => {
+    if (event.target === addAssignmentModal) {
+      addAssignmentModal.classList.add("d-none");
+    }
+  });
+});
+</script>
